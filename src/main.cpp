@@ -228,30 +228,6 @@ void autonomous(void) {/*
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
-void usercontrol(void) {
-  // User control code here, inside the loop
-  while (1) {
-    // This is the main execution loop for the user control program.
-    // Each time through the loop your program should update motor + servo
-    // values based on feedback from the joysticks.
-
-    // ........................................................................
-    // Insert user code here. This is where you use the joystick values to
-    // update your motors, etc.
-    // ........................................................................
-
-    //Replace this line with chassis.control_tank(); for tank drive 
-    //or chassis.control_holonomic(); for holo drive.
-
-    controller1.ButtonA
-
-    chassis.control_arcade();
-
-    wait(20, msec); // Sleep the task for a short amount of time to
-                    // prevent wasted resources.
-  }
-}
-
 //
 // Main will set up the competition functions and callbacks.
 //
