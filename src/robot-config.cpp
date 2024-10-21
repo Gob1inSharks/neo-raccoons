@@ -16,7 +16,7 @@ brain  Brain;
 
 //output devices
 
-//reverse turning direction in drive.cpp
+//reverse turning direction in JAR-Template/drive.cpp
 motor LF = motor(PORT20,ratio6_1,false);
 motor LM = motor(PORT19,ratio6_1,false);
 motor LB = motor(PORT18,ratio6_1,false);
@@ -33,7 +33,7 @@ digital_out CL = digital_out(Brain.ThreeWirePort.A);
 
 //input devices
 controller Controller1 = controller();
-rotation RotaryEncoder = rotation(,false);
+rotation RotaryEncoder = rotation(PORT2,false);
 
 void vexcodeInit( void ) {
   // nothing to initialize
