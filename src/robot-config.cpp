@@ -14,6 +14,7 @@ brain  Brain;
 
 //false is forward, true is reverse
 
+//output devices
 motor LF = motor(PORT20,ratio6_1,false);
 motor LM = motor(PORT19,ratio6_1,false);
 motor LB = motor(PORT18,ratio6_1,false);
@@ -26,8 +27,9 @@ motor IN = motor(PORT16,ratio18_1,false);
 motor HK = motor(PORT10,ratio6_1,false);
 motor LT = motor(PORT17,ratio18_1,false);
 
-//Add your devices below, and don't forget to do the same in robot-config.h:
+digital_out CL = digital_out(Brain.ThreeWirePort.A);
 
+//input devices
 controller Controller1 = controller();
 rotation RotaryEncoder = rotation(,false);
 

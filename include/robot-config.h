@@ -17,6 +17,8 @@ extern motor IN;
 extern motor LT;
 extern motor HK;
 
+extern digital_out CL;
+
 //Add your devices below, and don't forget to do the same in robot-config.cpp:
 
 extern controller Controller1;
