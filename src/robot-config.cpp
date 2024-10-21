@@ -15,13 +15,15 @@ brain  Brain;
 //false is forward, true is reverse
 
 //output devices
+
+//reverse turning direction in drive.cpp
 motor LF = motor(PORT20,ratio6_1,false);
 motor LM = motor(PORT19,ratio6_1,false);
 motor LB = motor(PORT18,ratio6_1,false);
 
-motor RF = motor(PORT11,ratio6_1,false);
-motor RM = motor(PORT13,ratio6_1,false);
-motor RB = motor(PORT12,ratio6_1,false);
+motor RF = motor(PORT11,ratio6_1,true);
+motor RM = motor(PORT13,ratio6_1,true);
+motor RB = motor(PORT12,ratio6_1,true);
 
 motor IN = motor(PORT16,ratio18_1,false);
 motor HK = motor(PORT10,ratio6_1,false);

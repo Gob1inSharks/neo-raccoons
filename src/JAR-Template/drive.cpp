@@ -1,5 +1,10 @@
 #include "vex.h"
 
+
+//change turning direction here
+//int dir = 1;
+int dir = -1; 
+
 /**
  * Drive constructor for the chassis.
  * Even though there's only one constructor, there can be
@@ -691,8 +696,8 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);
   float turn = deadband(controller(primary).Axis1.value(), 5);
-  DriveL.spin(fwd, to_volt(throttle+turn), volt);
-  DriveR.spin(fwd, to_volt(throttle-turn), volt);
+  DriveL.spin(fwd, to_volt(throttle+dir*turn), volt);
+  DriveR.spin(fwd, to_volt(throttle-dir*turn), volt);
 }
 
 /**
