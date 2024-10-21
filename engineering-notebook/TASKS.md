@@ -6,6 +6,6 @@ He will do it trust me.
 
 ## CODE
 
-1. Fix usercontrol
-2. 
+1. ~~Write usercontrol #finished~~
+2. Fix liftcode with added rotation sensor
 
