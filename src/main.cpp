@@ -186,7 +186,7 @@ void pre_auton() {
  * 7: Holonomic odom test.
  */
 
-void autonomous(void) {
+void autonomous(void) {/*
   auto_started = true;
   switch(current_auton_selection){ 
     case 0:
@@ -214,7 +214,7 @@ void autonomous(void) {
       break;
     case 7:
       holonomic_odom_test();
-      break;
+      break;*/
  }
 }
 
