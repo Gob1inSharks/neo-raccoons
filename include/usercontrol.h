@@ -5,6 +5,15 @@ class Drive;
 
 extern Drive chassis;
 
-void usercontrol(void);
+
+double maxLiftAngle;
+bool liftIsAtMaxHeight;
+void liftRotateToMax(void);
+
+double minLiftAngle;
+bool liftIsAtMinHeight;
+void liftRotateToMin(void);
+
 bool clampDown;
 bool liftUp;
+void usercontrol(void);
