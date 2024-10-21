@@ -13,21 +13,23 @@ brain  Brain;
 // TODO, put PORTS!!!
 
 //false is forward, true is reverse
-bool LEFT_REVERSED = false;
 
 motor LF = motor(,ratio6_1,false);
 motor LM = motor(,ratio6_1,false);
 motor LB = motor(,ratio6_1,false);
 
-bool RIGHT_REVERSED = false;
-
 motor RF = motor(,ratio6_1,false);
 motor RM = motor(,ratio6_1,false);
 motor RB = motor(,ratio6_1,false);
 
+motor IN = motor(,ratio18_1,false);
+motor HK = motor(,ratio6_1,false);
+motor LT = motor(,ratio18_1,false);
+
 //Add your devices below, and don't forget to do the same in robot-config.h:
 
-controller Controller;
+controller Controller = controller();
+rotation RotaryEncoder = rotation(,false);
 
 void vexcodeInit( void ) {
   // nothing to initialize

@@ -53,12 +53,12 @@ motor_group(RF,RM,RB),
 PORT1, //TODO
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
-3.25, //TODO
+2.75, //TODO
 
 //External ratio, must be in decimal, in the format of input teeth/output teeth.
 //If your motor has an 84-tooth gear and your wheel has a 60-tooth gear, this value will be 1.4.
 //If the motor drives the wheel directly, this value is 1:
-0.6, //TODO
+0.75, //TODO
 
 //Gyro scale, this is what your gyro reads when you spin the robot 360 degrees.
 //For most cases 360 will do fine here, but this scale factor can be very helpful when precision is necessary.
@@ -105,7 +105,8 @@ PORT3,     -PORT4,
 
 );
 
-int current_auton_selection = 0;
+
+int current_auton_selection = 0; // change this value here
 bool auto_started = true;
 
 /**
@@ -241,6 +242,9 @@ void usercontrol(void) {
 
     //Replace this line with chassis.control_tank(); for tank drive 
     //or chassis.control_holonomic(); for holo drive.
+
+    controller1.ButtonA
+
     chassis.control_arcade();
 
     wait(20, msec); // Sleep the task for a short amount of time to

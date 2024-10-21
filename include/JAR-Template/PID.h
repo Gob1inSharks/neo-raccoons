@@ -10,10 +10,10 @@
 class PID
 {
 public:
-  float error = 0;
-  float kp = 0;
-  float ki = 0;
-  float kd = 0;
+  float error = 0.1;
+  float kp = 0.1;
+  float ki = 0.1;
+  float kd = 0.1;
   float starti = 0;
   float settle_error = 0;
   float settle_time = 0;

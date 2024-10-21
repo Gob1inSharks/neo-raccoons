@@ -14,10 +14,12 @@ extern motor RM;
 extern motor RB;
 
 extern motor IN;
-extern motor LIFT;
+extern motor LT;
+extern motor HK;
 
 //Add your devices below, and don't forget to do the same in robot-config.cpp:
 
-extern controller Controller;
+extern controller1 Controller;
+extern rotation RotaryEncoder;
 
-void  vexcodeInit( void );
+void vexcodeInit( void );
