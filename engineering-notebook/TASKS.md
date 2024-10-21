@@ -8,4 +8,5 @@ He will do it trust me.
 
 1. ~~Write usercontrol #finished~~
 2. Fix liftcode with added rotation sensor
+3. Have driver test out both Cheesydrnive and Normal Drive
 
