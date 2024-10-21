@@ -1,10 +1,9 @@
 #include "vex.h"
 
 bool clampDown = false;
-
 bool liftUp = false;
 
-double maxLiftAngle;
+/*double maxLiftAngle;
 bool liftIsAtMaxHeight;
 void liftIsAtMaxHeight(void) {
   continue;
@@ -14,7 +13,7 @@ double minLiftAngle;
 bool liftIsAtMinHeight;
 void liftIsAtMinHeight(void) {
   continue;
-}
+}*/
 
 void usercontrol(void) {
   // User control code here, inside the loop
@@ -50,12 +49,13 @@ void usercontrol(void) {
       wait(80,msec);
     }
 
+    /*
     //lift TODO after rotation is installed
     if (Controller1.ButtonL1.pressing()) {
       liftUp = false;
     }else if (Controller1.ButtonL2.pressing()) {
       liftUp = true;
-    }
+    }*/
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted memory
