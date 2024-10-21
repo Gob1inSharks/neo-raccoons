@@ -19,7 +19,7 @@ extern motor HK;
 
 //Add your devices below, and don't forget to do the same in robot-config.cpp:
 
-extern controller1 Controller;
+extern controller Controller1;
 extern rotation RotaryEncoder;
 
 void vexcodeInit( void );

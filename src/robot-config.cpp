@@ -14,21 +14,21 @@ brain  Brain;
 
 //false is forward, true is reverse
 
-motor LF = motor(,ratio6_1,false);
-motor LM = motor(,ratio6_1,false);
-motor LB = motor(,ratio6_1,false);
+motor LF = motor(PORT20,ratio6_1,false);
+motor LM = motor(PORT19,ratio6_1,false);
+motor LB = motor(PORT18,ratio6_1,false);
 
-motor RF = motor(,ratio6_1,false);
-motor RM = motor(,ratio6_1,false);
-motor RB = motor(,ratio6_1,false);
+motor RF = motor(PORT11,ratio6_1,false);
+motor RM = motor(PORT13,ratio6_1,false);
+motor RB = motor(PORT12,ratio6_1,false);
 
-motor IN = motor(,ratio18_1,false);
-motor HK = motor(,ratio6_1,false);
-motor LT = motor(,ratio18_1,false);
+motor IN = motor(PORT16,ratio18_1,false);
+motor HK = motor(PORT10,ratio6_1,false);
+motor LT = motor(PORT17,ratio18_1,false);
 
 //Add your devices below, and don't forget to do the same in robot-config.h:
 
-controller Controller = controller();
+controller Controller1 = controller();
 rotation RotaryEncoder = rotation(,false);
 
 void vexcodeInit( void ) {
