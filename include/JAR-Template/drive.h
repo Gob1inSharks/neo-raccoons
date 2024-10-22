@@ -152,4 +152,5 @@ public:
   void control_arcade();
   void control_tank();
   void control_holonomic();
+  void control_cheesy();
 };
