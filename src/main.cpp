@@ -123,7 +123,7 @@ void pre_auton() {
 
   while(!auto_started){
     Brain.Screen.clearScreen();
-    Brain.Screen.printAt(5, 20, "JAR Template v1.2.0");
+    Brain.Screen.printAt(5, 20, "Neo Racoons");
     Brain.Screen.printAt(5, 40, "Battery Percentage:");
     Brain.Screen.printAt(5, 60, "%d", Brain.Battery.capacity());
     Brain.Screen.printAt(5, 80, "Chassis Heading Reading:");
@@ -186,35 +186,25 @@ void pre_auton() {
  * 7: Holonomic odom test.
  */
 
-void autonomous(void) {/*
+void autonomous(void) {
   auto_started = true;
   switch(current_auton_selection){ 
     case 0:
-      full_test();
-      task::sleep(1000);
-      odom_test();
       break;
     case 1:         
-      drive_test();
       break;
     case 2:
-      turn_test();
       break;
     case 3:
-      swing_test();
       break;
     case 4:
-      full_test();
       break;
     case 5:
-      odom_test();
       break;
     case 6:
-      tank_odom_test();
       break;
     case 7:
-      holonomic_odom_test();
-      break;*/
+      break;
  }
 }
 
