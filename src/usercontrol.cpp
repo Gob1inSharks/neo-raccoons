@@ -19,7 +19,7 @@ void usercontrol(void) {
   // User control code here, inside the loop
   while (1) {
 
-    chassis.control_arcade(); //look in JAR-Template/drive.h for more info
+    chassis.control_cheesy(); //look in JAR-Template/drive.h for more info
 
     //intake + hook HOLD DOWN
     if(Controller1.ButtonR1.pressing()) {
@@ -48,7 +48,7 @@ void usercontrol(void) {
       CL.set(false);
       wait(80,msec);
     }
-
+    
     /*
     //lift TODO after rotation is installed
     if (Controller1.ButtonL1.pressing()) {

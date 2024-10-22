@@ -735,3 +735,104 @@ int Drive::position_track_task(){
   chassis.position_track();
   return(0);
 }
+
+// We apply a sinusoidal curve (twice) to the joystick input to give finer
+// control at small inputs.
+double turnRemapping(double iturn) {
+    double denominator = sin(M_PI / 2 * CD_TURN_NONLINEARITY);
+    double firstRemapIteration =
+        sin(M_PI / 2 * CD_TURN_NONLINEARITY * iturn) / denominator;
+    return sin(M_PI / 2 * CD_TURN_NONLINEARITY * firstRemapIteration) / denominator;
+}
+
+// On each iteration of the drive controller (where we aren't point turning) we
+// constrain the accumulators to the range [-1, 1].
+double quickStopAccumulator = 0.0;
+double negInertiaAccumulator = 0.0;
+
+void updateAccumulators() {
+    if (negInertiaAccumulator > 1) {
+        negInertiaAccumulator -= 1;
+    } else if (negInertiaAccumulator < -1) {
+        negInertiaAccumulator += 1;
+    } else {
+        negInertiaAccumulator = 0;
+    }
+
+    if (quickStopAccumulator > 1) {
+        quickStopAccumulator -= 1;
+    } else if (quickStopAccumulator < -1) {
+        quickStopAccumulator += 1;
+    } else {
+        quickStopAccumulator = 0.0;
+    }
+}
+
+double prevTurn = 0.0;
+double prevThrottle = 0.0;
+
+const double DRIVE_SLEW = 0.1;
+const double DRIVE_DEADBAND = 0.1;
+const double CD_NEG_INERTIA_SCALAR = 0.5;
+const double CD_SENSITIVITY = 0.1;
+
+std::pair<double, double> cheesyDrive(double ithrottle, double iturn) {
+    bool turnInPlace = false;
+    double linearCmd = ithrottle;
+    if (abs(ithrottle) < DRIVE_DEADBAND && abs(iturn) > DRIVE_DEADBAND) {
+        // The controller joysticks can output values near zero when they are
+        // not actually pressed. In the case of small inputs like this, we
+        // override the throttle value to 0.
+        linearCmd = 0.0;
+        turnInPlace = true;
+    } else if (ithrottle - prevThrottle > DRIVE_SLEW) {
+        linearCmd = prevThrottle + DRIVE_SLEW;
+    } else if (ithrottle - prevThrottle < -(DRIVE_SLEW * 2)) {
+        // We double the drive slew rate for the reverse direction to get
+        // faster stopping.
+        linearCmd = prevThrottle - (DRIVE_SLEW * 2);
+    }
+
+    double remappedTurn = turnRemapping(iturn);
+
+    double left, right;
+    if (turnInPlace) {
+        // The remappedTurn value is squared when turning in place. This
+        // provides even more fine control over small speed values.
+        left = remappedTurn * abs(remappedTurn);
+        right = -remappedTurn * abs(remappedTurn);
+
+    } else {
+        double negInertiaPower = (iturn - prevTurn) * CD_NEG_INERTIA_SCALAR;
+        negInertiaAccumulator += negInertiaPower;
+
+        double angularCmd =
+            abs(linearCmd) *  // the more linear vel, the faster we turn
+                (remappedTurn + negInertiaAccumulator) *
+                CD_SENSITIVITY -  // we can scale down the turning amount by a
+                                  // constant
+            quickStopAccumulator;
+
+        right = left = linearCmd;
+        left += angularCmd;
+        right -= angularCmd;
+
+        updateAccumulators();
+    }
+
+    prevTurn = iturn;
+    prevThrottle = ithrottle;
+    
+    return std::make_pair(left, right);
+}
+
+
+void Drive::control_cheesy(){
+  double throttle = deadband(controller(primary).Axis3.value(), 5);
+  double turn = deadband(controller(primary).Axis1.value(), 5);
+
+  std::pair<double, double> power = cheesyDrive(throttle, turn);
+
+  DriveL.spin(fwd, to_volt(throttle+dir*turn), volt);
+  DriveR.spin(fwd, to_volt(throttle-dir*turn), volt);
+}
