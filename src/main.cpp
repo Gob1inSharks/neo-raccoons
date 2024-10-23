@@ -107,6 +107,9 @@ PORT3,     -PORT4,
 
 
 int current_auton_selection = 0; // change this value here
+
+int current_drive_selection = 0; // do not change this value here
+
 bool auto_started = true;
 
 /**
@@ -206,6 +209,17 @@ void autonomous(void) {
     case 7:
       break;
  }
+}
+
+void usercontrol(void) {
+  switch(current_drive_selection){
+    case 0: 
+      usercontrolNormal();
+    case 1:
+      usercontrolCheesy(); //BROKEN DO NOT USE!!!
+    case 2:
+    break;
+  }
 }
 
 /*---------------------------------------------------------------------------*/
