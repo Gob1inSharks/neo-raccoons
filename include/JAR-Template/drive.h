@@ -153,4 +153,7 @@ public:
   void control_tank();
   void control_holonomic();
   void control_cheesy();
+
+  void simpleTurnLeftforTime(double time, double voltage);
+  void simpleTurnRightforTime(double time, double voltage);
 };

@@ -696,8 +696,8 @@ void Drive::holonomic_drive_to_pose(float X_position, float Y_position, float an
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);
   float turn = deadband(controller(primary).Axis1.value(), 5);
-  DriveL.spin(fwd, to_volt(throttle+dir*turn), volt);
-  DriveR.spin(fwd, to_volt(throttle-dir*turn), volt);
+  DriveL.spin(fwd, to_volt(throttle-dir*turn), volt);
+  DriveR.spin(fwd, to_volt(throttle+dir*turn), volt);
 }
 
 /**
@@ -836,4 +836,18 @@ void Drive::control_cheesy(){
 
   DriveL.spin(fwd, to_volt(val.first), volt);
   DriveR.spin(fwd, to_volt(val.second), volt);
+}
+
+void Drive::simpleTurnLeftforTime(double time, double voltage)
+{
+  drive_with_voltage(voltage,-voltage);
+  wait(time,msec);
+  drive_stop(hold);
+}
+
+void Drive::simpleTurnRightforTime(double time, double voltage)
+{
+  drive_with_voltage(voltage,-voltage);
+  wait(time,msec);
+  drive_stop(hold);
 }
