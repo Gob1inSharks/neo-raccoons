@@ -1,4 +1,5 @@
 #include "vex.h"
+#include "usercontrol.h"
 
 using namespace vex;
 competition Competition;
@@ -50,7 +51,7 @@ motor_group(LF,LM,LB),
 motor_group(RF,RM,RB),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT1, //TODO
+PORT2, //TODO
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
 2.75, //TODO
@@ -104,7 +105,6 @@ PORT3,     -PORT4,
 5.5
 
 );
-
 
 int current_auton_selection = 0; // change this value here
 
@@ -193,8 +193,11 @@ void autonomous(void) {
   auto_started = true;
   switch(current_auton_selection){ 
     case 0:
+      turnTest();
       break;
-    case 1:         
+    case 1:   
+      default_constants();   
+      timed_rush();
       break;
     case 2:
       break;
@@ -212,14 +215,7 @@ void autonomous(void) {
 }
 
 void usercontrol(void) {
-  switch(current_drive_selection){
-    case 0: 
-      usercontrolNormal();
-    case 1:
-      usercontrolCheesy(); //BROKEN DO NOT USE!!!
-    case 2:
-    break;
-  }
+  usercontrolNormal();
 }
 
 /*---------------------------------------------------------------------------*/
