@@ -24,4 +24,6 @@ extern digital_out CL;
 extern controller Controller1;
 extern rotation RotaryEncoder;
 
+extern inertial Gyro;
+
 void vexcodeInit( void );

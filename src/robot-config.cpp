@@ -17,16 +17,16 @@ brain  Brain;
 //output devices
 
 //reverse turning direction in JAR-Template/drive.cpp
-motor LF = motor(PORT20,ratio6_1,false);
-motor LM = motor(PORT19,ratio6_1,false);
-motor LB = motor(PORT18,ratio6_1,false);
+motor LF = motor(PORT20,ratio6_1,true);
+motor LM = motor(PORT19,ratio6_1,true);
+motor LB = motor(PORT18,ratio6_1,true);
 
-motor RF = motor(PORT11,ratio6_1,true);
-motor RM = motor(PORT13,ratio6_1,true);
-motor RB = motor(PORT12,ratio6_1,true);
+motor RF = motor(PORT11,ratio6_1,false);
+motor RM = motor(PORT13,ratio6_1,false);
+motor RB = motor(PORT12,ratio6_1,false);
 
 motor IN = motor(PORT16,ratio18_1,false);
-motor HK = motor(PORT10,ratio6_1,false);
+motor HK = motor(PORT10,ratio6_1,true);
 motor LT = motor(PORT17,ratio18_1,false);
 
 digital_out CL = digital_out(Brain.ThreeWirePort.A);
@@ -34,6 +34,8 @@ digital_out CL = digital_out(Brain.ThreeWirePort.A);
 //input devices
 controller Controller1 = controller();
 rotation RotaryEncoder = rotation(PORT2,false);
+
+inertial Gyro = inertial(PORT2);
 
 void vexcodeInit( void ) {
   // nothing to initialize
