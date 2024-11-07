@@ -15,4 +15,4 @@ bool liftIsAtMinHeight;
 void liftRotateToMin(void);
 */
 
-void usercontrol(void);
+void usercontrolNormal(void);
