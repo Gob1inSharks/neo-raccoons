@@ -84,6 +84,7 @@ void usercontrolNormal(void){
     //clamp TOGGLE
     if (Controller1.ButtonB.pressing() && !lastClamp) {
       CL.set(!(CL.value()));
+      wait(80,msec);
     }
     lastClamp = Controller1.ButtonB.pressing();
     
