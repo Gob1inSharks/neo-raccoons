@@ -193,13 +193,19 @@ void autonomous(void) {
   auto_started = true;
   switch(current_auton_selection){ 
     case 0:
-      turnTest();
+      default_constants();
+      calibrateUntilAButton();
+      right_rush();
       break;
     case 1:   
-      default_constants();   
-      timed_rush();
+      default_constants();
+      calibrateUntilAButton();
+      left_rush();
       break;
     case 2:
+      default_constants();
+      calibrateWithDelay();
+      turn_test();
       break;
     case 3:
       break;
