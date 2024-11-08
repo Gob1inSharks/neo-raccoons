@@ -1,10 +1,10 @@
 {
 	"project": {
-		"name": "neo-racoons",
+		"name": "neo-raccoons",
 		"slot": 1,
-		"description": "2091R team code",
+		"description": "2059R'",
 		"platform": "V5",
-		"creationDate": "Tue, 22 Oct 2024 08:04:04 GMT",
+		"creationDate": "Fri, 08 Nov 2024 15:52:43 GMT",
 		"language": "cpp",
 		"sdkVersion": "V5_20240223_11_00_00",
 		"cpp": {

@@ -106,9 +106,7 @@ PORT3,     -PORT4,
 
 );
 
-int current_auton_selection = 0; // change this value here
-
-int current_drive_selection = 0; // do not change this value here
+int current_auton_selection = 0; // change this value heres
 
 bool auto_started = true;
 
@@ -134,36 +132,37 @@ void pre_auton() {
     Brain.Screen.printAt(5, 120, "Selected Auton:");
     switch(current_auton_selection){
       case 0:
-        Brain.Screen.printAt(5, 140, "Auton 1");
+        Brain.Screen.printAt(5, 140, "Red Ring Rush");
         break;
       case 1:
-        Brain.Screen.printAt(5, 140, "Auton 2");
+        Brain.Screen.printAt(5, 140, "Red Mogo Rush");
         break;
       case 2:
-        Brain.Screen.printAt(5, 140, "Auton 3");
+        Brain.Screen.printAt(5, 140, "Blue Mogo Rush");
         break;
       case 3:
-        Brain.Screen.printAt(5, 140, "Auton 4");
+        Brain.Screen.printAt(5, 140, "Blue Ring Rush");
         break;
       case 4:
-        Brain.Screen.printAt(5, 140, "Auton 5");
+        Brain.Screen.printAt(5, 140, "Calibrate");
         break;
       case 5:
-        Brain.Screen.printAt(5, 140, "Auton 6");
+        Brain.Screen.printAt(5, 140, "Testing Slot 1");
         break;
       case 6:
-        Brain.Screen.printAt(5, 140, "Auton 7");
+        Brain.Screen.printAt(5, 140, "Testing Slot 2");
         break;
       case 7:
-        Brain.Screen.printAt(5, 140, "Auton 8");
+        Brain.Screen.printAt(5, 140, "Testing Slot 3");
         break;
     }
+    /* //close the auton selector for simplicity
     if(Brain.Screen.pressing()){
       while(Brain.Screen.pressing()) {}
       current_auton_selection ++;
     } else if (current_auton_selection == 8){
       current_auton_selection = 0;
-    }
+    }*/
     task::sleep(10);
   }
 }
@@ -194,28 +193,44 @@ void autonomous(void) {
   switch(current_auton_selection){ 
     case 0:
       default_constants();
+      Controller1.Screen.print("Red Ring Rush");
       red_ring_rush();
       break;
     case 1:   
       default_constants();
+      Controller1.Screen.print("Red Mogo Rush");
       red_mogo_rush();
       break;
     case 2:
       default_constants();
+      Controller1.Screen.print("Blue Mogo Rush");
       blue_mogo_rush();
       break;
     case 3:
       default_constants();
+      Controller1.Screen.print("Blue Ring Rush");
       blue_ring_rush();
       break;
     case 4:
       calibrateWithDelay();
       break;
     case 5:
+      calibrateWithDelay();
+      default_constants();
+      Controller1.Screen.print("Testing Slot 1");
+      red_mogo_rush();
       break;
     case 6:
+      calibrateWithDelay();
+      default_constants();
+      Controller1.Screen.print("Testing Slot 2");
+      blue_ring_rush();
       break;
     case 7:
+      calibrateWithDelay();
+      default_constants();
+      Controller1.Screen.print("Testing Slot 3");
+      red_ring_rush();
       break;
  }
 }
