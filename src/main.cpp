@@ -218,21 +218,21 @@ void autonomous(void) {
       calibrateWithDelay();
       default_constants();
       Controller1.Screen.print("Testing Slot 1");
-      red_mogo_rush();
+      mogo_rush();
       break;
     case 6:
       calibrateWithDelay();
       default_constants();
       Controller1.Screen.print("Testing Slot 2");
-      blue_ring_rush();
+      ring_rush();
       break;
     case 7:
       calibrateWithDelay();
       default_constants();
       Controller1.Screen.print("Testing Slot 3");
-      red_ring_rush();
+      blue_ring_rush();
       break;
- }
+  }
 }
 
 void usercontrol(void) {

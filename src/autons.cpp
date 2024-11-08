@@ -23,15 +23,18 @@ void default_constants(){
 }
 
 /**
- * A little of this, a little of that; it should end roughly where it started.
+ * Sets constants to be more effective for odom movements.
+ * For functions like drive_to_point(), it's often better to have
+ * a slower max_voltage and greater settle_error than you would otherwise.
  */
-void full_test(){
-  chassis.drive_distance(24);
-  chassis.turn_to_angle(-45);
-  chassis.drive_distance(-36);
-  chassis.right_swing_to_angle(-90);
-  chassis.drive_distance(24);
-  chassis.turn_to_angle(0);
+
+void odom_constants(){
+  default_constants();
+  chassis.heading_max_voltage = 10;
+  chassis.drive_max_voltage = 8;
+  chassis.drive_settle_error = 3;
+  chassis.boomerang_lead = .5;
+  chassis.drive_min_voltage = 0;
 }
 
 void calibrate(){
@@ -61,7 +64,19 @@ void calibrateUntilAButton(){ //BROKEN DO NOT USE
   Controller1.Screen.print("Gyro Calibrated. Now Press A");
 }
 
-void turnTest(){
+/**
+ * A little of this, a little of that; it should end roughly where it started.
+ */
+void full_test(){
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(-45);
+  chassis.drive_distance(-36);
+  chassis.right_swing_to_angle(-90);
+  chassis.drive_distance(24);
+  chassis.turn_to_angle(0);
+}
+
+void turn_test(){
 
   calibrateWithDelay();
 
@@ -81,33 +96,6 @@ void turnTest(){
     wait(50,msec); //do not overwhelm the bot
     Brain.Screen.clearScreen();
   }
-}
-
-void timed_rush()
-{
-  //(float distance, float heading, float drive_max_voltage, float heading_max_voltage, float drive_settle_error, float drive_settle_time, float drive_timeout);
-  chassis.drive_distance(-25);
-  chassis.simpleTurnLeftforTime(600, 10);
-}
-
-/**
- * Sets constants to be more effective for odom movements.
- * For functions like drive_to_point(), it's often better to have
- * a slower max_voltage and greater settle_error than you would otherwise.
- */
-
-void odom_constants(){
-  default_constants();
-  chassis.heading_max_voltage = 10;
-  chassis.drive_max_voltage = 8;
-  chassis.drive_settle_error = 3;
-  chassis.boomerang_lead = .5;
-  chassis.drive_min_voltage = 0;
-}
-
-void gold_rush(){
-
-  chassis.drive_distance(10);
 }
 
 void intakeOn(){
@@ -147,19 +135,38 @@ void intakeForTime(int time){
 }
 
 void mogo_rush(){
+
   liftDown();
   clampDown();
+
   chassis.drive_distance(-14,0,12,4,1,100,5000);
   chassis.drive_distance(-7,0,5,0);
   clampUp();
+
   intakeOn();
   intakeForTime(500);
+
   chassis.turn_to_angle(102,12,3,10,5000);
-  /*clampDown();
-  intakeOn();
+
+  clampDown();
+  wait(200,msec);
+
   chassis.drive_distance(20,0,12,0,1.5,0,5000);
-  chassis.drive_distance(5,0,12,0);
-  liftHold();*/
+  intakeOn();
+  chassis.drive_distance(5,0,10,0);
+  wait(100,msec);
+  intakeOff();
+
+  chassis.turn_to_angle(185);
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,5,0);
+  clampUp();
+
+  intakeOn();
+  intakeForTime(500);
+  //clampDown();
+
+  liftHold();
 
   /*
   chassis.drive_distance(-21);
@@ -176,22 +183,31 @@ void mogo_rush(){
 }
 
 void ring_rush(){
+
   liftDown();
   clampDown();
+
   chassis.drive_distance(-14,0,12,4,1,100,5000);
   chassis.drive_distance(-7,0,8,0);
   clampUp();
+
   intakeOn();
   wait(500,msec);
+
   chassis.turn_to_angle(-140,12,3,10,5000);
   chassis.drive_distance(25,0,12,0,1.5,10,5000);
   wait(500,msec);
+
   chassis.drive_distance(-5,0,12,0);
   chassis.turn_to_angle(-123,12,3,10,5000);
+
   chassis.drive_distance(10,0,12,0,1,10,5000);
-  //clampDown();
   chassis.drive_distance(-5,0,12,0);
+
 }
+
+//below are game autons
+//only change after testing
 
 void red_mogo_rush(){
   liftDown();
@@ -245,7 +261,7 @@ void blue_ring_rush(){
   chassis.drive_distance(25,0,12,0,1.5,10,5000);
   wait(500,msec);
   chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(123,12,3,10,5000);
+  chassis.turn_to_angle(157,12,3,10,5000);
   chassis.drive_distance(10,0,12,0,1,10,5000);
   //clampDown();
   chassis.drive_distance(-5,0,12,0); 
