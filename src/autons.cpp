@@ -11,7 +11,7 @@
 void default_constants(){
   // Each constant set is in the form of (maxVoltage, kP, kI, kD, startI).
   chassis.set_drive_constants(12, 1, .01, 2, 0);
-  chassis.set_heading_constants(6, .5, 1, 1, 1);
+  chassis.set_heading_constants(6, .5, 0.01, 2, 0);
   chassis.set_turn_constants(12, .5, .03, 4, 0);
   chassis.set_swing_constants(12, .3, .001, 2, 0);
 
@@ -50,15 +50,11 @@ void calibrateWithDelay(){
   Controller1.Screen.print("Inertial Calibrated");
 }
 
-void calibrateUntilAButton(){
+void calibrateUntilAButton(){ //BROKEN DO NOT USE
   calibrate();
   int count = 0;
   Controller1.Screen.print("WAIT!!! GYRO IS CALIBRATING");
-  while(!(Controller1.ButtonL1.pressing())){
-    wait(50,msec);
-    count += 50;
-    if(count > 5000){}
-  }
+  wait(5000,msec);
   Controller1.Screen.clearScreen();
   Controller1.Screen.print("Gyro Calibrated. Now Press A");
 }
@@ -113,8 +109,8 @@ void gold_rush(){
 }
 
 void intakeOn(){
-  IN.spin(forward, 127, pct);
-  HK.spin(forward, 127, pct);
+  IN.spin(reverse, 127, pct);
+  HK.spin(reverse, 127, pct);
 }
 
 void intakeOff(){
@@ -124,23 +120,49 @@ void intakeOff(){
 
 void clampDown(){
   CL.set(true);
-  lastClamp = true;
+  //lastClamp = true;
   wait(80,msec);
 }
 
 void clampUp(){
   CL.set(false);
-  lastClamp = false;
-  wait(80,msec)
+  //lastClamp = false;
+  wait(80,msec);
 }
 
-void right_rush(){
+void liftDown(){
+  LT.spin(forward, 5, pct);
+}
+
+void liftHold(){
+  LT.stop(hold);
+}
+
+void intakeForTime(int time){
   intakeOn();
-  chassis.drive_distance(-50);
-  chassis.turn_to_angle(30);
+  wait(time,msec);
+  intakeOff();
+}
+
+void mogo_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,5,0);
+  clampUp();
+  intakeOn();
+  intakeForTime(500);
+  chassis.turn_to_angle(102,12,3,10,5000);
+  /*clampDown();
+  intakeOn();
+  chassis.drive_distance(20,0,12,0,1.5,0,5000);
+  chassis.drive_distance(5,0,12,0);
+  liftHold();*/
+
+  /*
   chassis.drive_distance(-21);
   chassis.drive_distance(-4,0,6,0);
-  clampDown();
+  clampDown();*/
   /*
   chassis.turn_to_angle(-15);
   chassis.drive_distance(6);
@@ -151,6 +173,20 @@ void right_rush(){
   */
 }
 
-void left_rush(){
-
+void ring_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,8,0);
+  clampUp();
+  intakeOn();
+  wait(500,msec);
+  chassis.turn_to_angle(-140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(-123,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-5,0,12,0);
 }
