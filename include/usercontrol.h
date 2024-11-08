@@ -15,4 +15,5 @@ bool liftIsAtMinHeight;
 void liftRotateToMin(void);
 */
 
+bool lastClamp;
 void usercontrolNormal(void);
