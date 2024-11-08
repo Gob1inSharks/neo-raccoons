@@ -43,14 +43,17 @@ void calibrate(){
 void calibrateWithDelay(){
   Brain.Screen.clearScreen();
   Gyro.calibrate();
-  Brain.Screen.print("Inertial Calibrating");
+  Brain.Screen.print("WAIT: Inertial Calibrating");
   Controller1.Screen.print("Inertial Calibrating");
   wait(5000,msec);
   Brain.Screen.print("Intertial Calibrated");
+  Controller1.Screen.clearLine();
   Controller1.Screen.print("Inertial Calibrated");
 }
 
 void calibrateUntilAButton(){ //BROKEN DO NOT USE
+  //turns out you cannot press a button during
+  //autonomous
   calibrate();
   int count = 0;
   Controller1.Screen.print("WAIT!!! GYRO IS CALIBRATING");
@@ -189,4 +192,62 @@ void ring_rush(){
   chassis.drive_distance(10,0,12,0,1,10,5000);
   //clampDown();
   chassis.drive_distance(-5,0,12,0);
+}
+
+void red_mogo_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,5,0);
+  clampUp();
+  intakeOn();
+  intakeForTime(500);
+  chassis.turn_to_angle(102,12,3,10,5000);
+}
+
+void red_ring_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,8,0);
+  clampUp();
+  intakeOn();
+  wait(500,msec);
+  chassis.turn_to_angle(-140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(-123,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-5,0,12,0); 
+}
+
+void blue_mogo_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,5,0);
+  clampUp();
+  intakeOn();
+  intakeForTime(500);
+  chassis.turn_to_angle(-102,12,3,10,5000);
+}
+
+void blue_ring_rush(){
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,8,0);
+  clampUp();
+  intakeOn();
+  wait(500,msec);
+  chassis.turn_to_angle(140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(123,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-5,0,12,0); 
 }

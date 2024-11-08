@@ -26,3 +26,7 @@ void left_rush();
 void right_rush();
 void mogo_rush();
 void ring_rush();
+void red_mogo_rush();
+void blue_mogo_rush();
+void red_ring_rush();
+void blue_ring_rush();
