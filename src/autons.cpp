@@ -44,11 +44,10 @@ void calibrateWithDelay(){
   Brain.Screen.clearScreen();
   Gyro.calibrate();
   Brain.Screen.print("WAIT: Inertial Calibrating");
-  Controller1.Screen.print("Inertial Calibrating");
+  Controller1.Screen.print("WAIT: Inertial Calibrating");
   wait(5000,msec);
-  Brain.Screen.print("Intertial Calibrated");
   Controller1.Screen.clearLine();
-  Controller1.Screen.print("Inertial Calibrated");
+  Brain.Screen.clearScreen();
 }
 
 void calibrateUntilAButton(){ //BROKEN DO NOT USE
