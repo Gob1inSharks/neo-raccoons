@@ -15,7 +15,7 @@ void liftIsAtMinHeight(void) {
   continue;
 }*/
 
-bool lastClamp = false;
+//bool lastClamp = false;
 
 void usercontrolNormal(void){
   
