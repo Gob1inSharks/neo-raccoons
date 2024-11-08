@@ -37,13 +37,35 @@ void full_test(){
 void calibrate(){
   Brain.Screen.clearScreen();
   Gyro.calibrate();
+  Brain.Screen.print("Inertial Calibrating");
+}
+
+void calibrateWithDelay(){
+  Brain.Screen.clearScreen();
+  Gyro.calibrate();
+  Brain.Screen.print("Inertial Calibrating");
+  Controller1.Screen.print("Inertial Calibrating");
   wait(5000,msec);
-  Brain.Screen.print("Inertial Calibrated");
+  Brain.Screen.print("Intertial Calibrated");
+  Controller1.Screen.print("Inertial Calibrated");
+}
+
+void calibrateUntilAButton(){
+  calibrate();
+  int count = 0;
+  Controller1.Screen.print("WAIT!!! GYRO IS CALIBRATING");
+  while(!(Controller1.ButtonL1.pressing())){
+    wait(50,msec);
+    count += 50;
+    if(count > 5000){}
+  }
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.print("Gyro Calibrated. Now Press A");
 }
 
 void turnTest(){
 
-  calibrate();
+  calibrateWithDelay();
 
   float angle = 180;
   float turn_max_voltage = 10;
@@ -88,4 +110,47 @@ void odom_constants(){
 void gold_rush(){
 
   chassis.drive_distance(10);
+}
+
+void intakeOn(){
+  IN.spin(forward, 127, pct);
+  HK.spin(forward, 127, pct);
+}
+
+void intakeOff(){
+  IN.stop(hold);
+  HK.stop(hold);
+}
+
+void clampDown(){
+  CL.set(true);
+  lastClamp = true;
+  wait(80,msec);
+}
+
+void clampUp(){
+  CL.set(false);
+  lastClamp = false;
+  wait(80,msec)
+}
+
+void right_rush(){
+  intakeOn();
+  chassis.drive_distance(-50);
+  chassis.turn_to_angle(30);
+  chassis.drive_distance(-21);
+  chassis.drive_distance(-4,0,6,0);
+  clampDown();
+  /*
+  chassis.turn_to_angle(-15);
+  chassis.drive_distance(6);
+  chassis.turn_to_angle(70);
+  chassis.drive_distance(15);
+  chassis.turn_to_angle(0);
+  chassis.drive_distance(15);
+  */
+}
+
+void left_rush(){
+
 }

@@ -17,3 +17,10 @@ void tank_odom_test();
 void holonomic_odom_test();
 void gold_rush();
 void timed_rush();
+void calibrate();
+void calibrateWithDelay();
+
+void calibrateUntilAButton();
+
+void left_rush();
+void right_rush();
