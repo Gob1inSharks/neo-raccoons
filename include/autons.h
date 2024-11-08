@@ -20,10 +20,8 @@ void timed_rush();
 void calibrate();
 void calibrateWithDelay();
 
-void calibrateUntilAButton();
+//void calibrateUntilAButton(); //broken function do not use
 
-void left_rush();
-void right_rush();
 void mogo_rush();
 void ring_rush();
 void red_mogo_rush();
