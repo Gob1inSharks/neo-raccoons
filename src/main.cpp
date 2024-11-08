@@ -194,18 +194,18 @@ void autonomous(void) {
   switch(current_auton_selection){ 
     case 0:
       default_constants();
-      calibrateUntilAButton();
-      right_rush();
+      calibrateWithDelay();
+      ring_rush();
       break;
     case 1:   
       default_constants();
       calibrateUntilAButton();
-      left_rush();
+      mogo_rush();
       break;
     case 2:
       default_constants();
       calibrateWithDelay();
-      turn_test();
+      turnTest();
       break;
     case 3:
       break;

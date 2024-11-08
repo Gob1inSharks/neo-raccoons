@@ -24,3 +24,5 @@ void calibrateUntilAButton();
 
 void left_rush();
 void right_rush();
+void mogo_rush();
+void ring_rush();
