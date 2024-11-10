@@ -106,7 +106,7 @@ PORT3,     -PORT4,
 
 );
 
-int current_auton_selection = 0; // change this value heres
+int current_auton_selection = 4; // change this value heres
 
 bool auto_started = true;
 
@@ -215,21 +215,19 @@ void autonomous(void) {
       calibrateWithDelay();
       break;
     case 5:
-      calibrateWithDelay();
       default_constants();
-      Controller1.Screen.print("Testing Slot 1");
-      mogo_rush();
+      Controller1.Screen.print("Red Four Rings Rush");
+      red_four_rings_rush();
       break;
     case 6:
-      calibrateWithDelay();
       default_constants();
-      Controller1.Screen.print("Testing Slot 2");
-      ring_rush();
+      Controller1.Screen.print("Blue Four Rings Rush");
+      blue_four_rings_rush();
       break;
     case 7:
       calibrateWithDelay();
       default_constants();
-      Controller1.Screen.print("Testing Slot 3");
+      Controller1.Screen.print("Testing Slot");
       blue_ring_rush();
       break;
   }
