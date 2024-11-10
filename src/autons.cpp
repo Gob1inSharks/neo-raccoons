@@ -37,6 +37,10 @@ void odom_constants(){
   chassis.drive_min_voltage = 0;
 }
 
+/*
+for gyro calibration
+must call before auton
+*/
 void calibrate(){
   Brain.Screen.clearScreen();
   Gyro.calibrate();
@@ -186,24 +190,25 @@ void ring_rush(){
 
   liftDown();
   clampDown();
-
   chassis.drive_distance(-14,0,12,4,1,100,5000);
   chassis.drive_distance(-7,0,8,0);
   clampUp();
-
+  //chassis.drive_stop();
   intakeOn();
   wait(500,msec);
-
-  chassis.turn_to_angle(-140,12,3,10,5000);
+  chassis.turn_to_angle(140,12,3,10,5000);
   chassis.drive_distance(25,0,12,0,1.5,10,5000);
   wait(500,msec);
-
   chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(-123,12,3,10,5000);
+  chassis.turn_to_angle(115,12,3,10,5000);
+  chassis.drive_distance(9,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-10,0,12,0);
 
-  chassis.drive_distance(10,0,12,0,1,10,5000);
-  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0);
 
+  //clampDown();
 }
 
 //below are game autons
@@ -226,16 +231,67 @@ void red_ring_rush(){
   chassis.drive_distance(-14,0,12,4,1,100,5000);
   chassis.drive_distance(-7,0,8,0);
   clampUp();
+  //chassis.drive_stop();
+  intakeOn();
+  wait(500,msec);
+  chassis.turn_to_angle(140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(123,12,3,10,5000);
+  chassis.drive_distance(7,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-5,0,12,0);
+}
+
+void red_four_rings_rush(){
+
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,8,0);
+  clampUp();
+  //chassis.drive_stop();
+  intakeOn();
+  wait(500,msec);
+  chassis.turn_to_angle(140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(115,12,3,10,5000);
+  chassis.drive_distance(9,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-10,0,12,0);
+
+  chassis.turn_to_angle(40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0);
+
+  //clampDown();
+}
+
+void blue_four_rings_rush(){
+
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,100,5000);
+  chassis.drive_distance(-7,0,8,0);
+  clampUp();
+  //chassis.drive_stop();
   intakeOn();
   wait(500,msec);
   chassis.turn_to_angle(-140,12,3,10,5000);
   chassis.drive_distance(25,0,12,0,1.5,10,5000);
   wait(500,msec);
   chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(-123,12,3,10,5000);
-  chassis.drive_distance(10,0,12,0,1,10,5000);
+  chassis.turn_to_angle(-115,12,3,10,5000);
+  chassis.drive_distance(9,0,12,0,1,10,5000);
   //clampDown();
-  chassis.drive_distance(-5,0,12,0); 
+  chassis.drive_distance(-10,0,12,0);
+
+  chassis.turn_to_angle(-40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0);
+
+  //clampDown();
 }
 
 void blue_mogo_rush(){
@@ -246,7 +302,7 @@ void blue_mogo_rush(){
   clampUp();
   intakeOn();
   intakeForTime(500);
-  chassis.turn_to_angle(-102,12,3,10,5000);
+  chassis.turn_to_angle(102,12,3,10,5000);
 }
 
 void blue_ring_rush(){
@@ -257,12 +313,39 @@ void blue_ring_rush(){
   clampUp();
   intakeOn();
   wait(500,msec);
-  chassis.turn_to_angle(140,12,3,10,5000);
+  chassis.turn_to_angle(-140,12,3,10,5000);
   chassis.drive_distance(25,0,12,0,1.5,10,5000);
   wait(500,msec);
   chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(157,12,3,10,5000);
-  chassis.drive_distance(10,0,12,0,1,10,5000);
+  chassis.turn_to_angle(-123,12,3,10,5000);
+  chassis.drive_distance(7,0,12,0,1,10,5000);
   //clampDown();
   chassis.drive_distance(-5,0,12,0); 
+}
+
+void blue_four_rings_rush_experimental(){
+
+  liftDown();
+  clampDown();
+  chassis.drive_distance(-14,0,12,4,1,50,5000);
+  chassis.drive_distance(-7,0,9,0);
+  clampUp();
+  //chassis.drive_stop();
+  intakeOn();
+  wait(400,msec);
+  chassis.turn_to_angle(140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  //KABOOM!!! BOOM!!!
+
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(115,12,3,10,5000);
+  chassis.drive_distance(9,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-10,0,12,0);
+
+  chassis.turn_to_angle(40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0);
+
+  //clampDown();
 }

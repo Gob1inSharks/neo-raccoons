@@ -28,3 +28,5 @@ void red_mogo_rush();
 void blue_mogo_rush();
 void red_ring_rush();
 void blue_ring_rush();
+void red_four_rings_rush();
+void blue_four_rings_rush();
