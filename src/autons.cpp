@@ -37,14 +37,46 @@ void odom_constants(){
   chassis.drive_min_voltage = 0;
 }
 
+void showGyroOnScreen(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print(Gyro.angle());
+  Controller1.Screen.newLine();
+  Controller1.Screen.print(Gyro.heading());
+  Controller1.Screen.newLine();
+  Controller1.Screen.print(Gyro.acceleration(yaxis));
+}
+
+void showGyroFinished(){
+  Controller1.Screen.clearScreen();
+  Controller1.Screen.setCursor(1,1);
+  Controller1.Screen.print("GYRO CALIBRATED");
+  Controller1.Screen.newLine();
+  Controller1.Screen.print("You're Good to Go");
+  Controller1.Screen.newLine();
+  Controller1.Screen.print("Good Luck!");
+}
+
 /*
 for gyro calibration
 must call before auton
 */
 void calibrate(){
-  Brain.Screen.clearScreen();
+
   Gyro.calibrate();
-  Brain.Screen.print("Inertial Calibrating");
+
+  int WAIT_TIME = 5000; //DO NOT CHANGE THIS VALUE
+  wait(WAIT_TIME,msec);
+
+  int DELAY_TIME = 50;
+  int clock = 0;
+  while(clock < WAIT_TIME){
+    showGyroOnScreen();
+    wait(DELAY_TIME,msec);
+    clock += DELAY_TIME;
+  }
+
+  showGyroFinished();
 }
 
 void calibrateWithDelay(){
@@ -55,17 +87,6 @@ void calibrateWithDelay(){
   wait(5000,msec);
   Controller1.Screen.clearLine();
   Brain.Screen.clearScreen();
-}
-
-void calibrateUntilAButton(){ //BROKEN DO NOT USE
-  //turns out you cannot press a button during
-  //autonomous
-  calibrate();
-  int count = 0;
-  Controller1.Screen.print("WAIT!!! GYRO IS CALIBRATING");
-  wait(5000,msec);
-  Controller1.Screen.clearScreen();
-  Controller1.Screen.print("Gyro Calibrated. Now Press A");
 }
 
 /**
@@ -83,7 +104,7 @@ void full_test(){
 void turn_test(){
 
   calibrateWithDelay();
-
+  
   float angle = 180;
   float turn_max_voltage = 10;
   float turn_settle_error = 3000;
@@ -138,77 +159,189 @@ void intakeForTime(int time){
   intakeOff();
 }
 
-void mogo_rush(){
-
+void start(){
   liftDown();
   clampDown();
-
-  chassis.drive_distance(-14,0,12,4,1,100,5000);
-  chassis.drive_distance(-7,0,5,0);
-  clampUp();
-
-  intakeOn();
-  intakeForTime(500);
-
-  chassis.turn_to_angle(102,12,3,10,5000);
-
-  clampDown();
-  wait(200,msec);
-
-  chassis.drive_distance(20,0,12,0,1.5,0,5000);
-  intakeOn();
-  chassis.drive_distance(5,0,10,0);
-  wait(100,msec);
-  intakeOff();
-
-  chassis.turn_to_angle(185);
-  chassis.drive_distance(-14,0,12,4,1,100,5000);
-  chassis.drive_distance(-7,0,5,0);
-  clampUp();
-
-  intakeOn();
-  intakeForTime(500);
-  //clampDown();
-
-  liftHold();
-
-  /*
-  chassis.drive_distance(-21);
-  chassis.drive_distance(-4,0,6,0);
-  clampDown();*/
-  /*
-  chassis.turn_to_angle(-15);
-  chassis.drive_distance(6);
-  chassis.turn_to_angle(70);
-  chassis.drive_distance(15);
-  chassis.turn_to_angle(0);
-  chassis.drive_distance(15);
-  */
 }
 
-void ring_rush(){
 
-  liftDown();
-  clampDown();
-  chassis.drive_distance(-14,0,12,4,1,100,5000);
-  chassis.drive_distance(-7,0,8,0);
+/*
+
+This simply goes forward and takes the mogo as fast as possible
+*/
+void mogo_rush(){
+
+  chassis.drive_distance(-14,0,12,4,
+                            2,
+                            50,
+                            2000);
+  chassis.drive_distance(-7,0,8,0,
+                            2,
+                            1,
+                            5000);
+
   clampUp();
-  //chassis.drive_stop();
+  //intakeOn();
+  
+  chassis.drive_distance(-3,0,8,0,
+                            2,
+                            1,
+                            5000);
+}
+
+/*
+
+This simply goes forward and takes the mogo as fast as possible,
+then dumps the load ring if wanted
+*/
+void mogo_rush_with_ring(){
+
+  chassis.drive_distance(-18,0,12,4,
+                            2,
+                            50,
+                            2000);
+  chassis.drive_distance(-3,0,8,0,
+                            2,
+                            1,
+                            5000);
+                            
+  clampUp();
   intakeOn();
-  wait(500,msec);
-  chassis.turn_to_angle(140,12,3,10,5000);
-  chassis.drive_distance(25,0,12,0,1.5,10,5000);
-  wait(500,msec);
-  chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(115,12,3,10,5000);
-  chassis.drive_distance(9,0,12,0,1,10,5000);
-  //clampDown();
-  chassis.drive_distance(-10,0,12,0);
+  
+  chassis.drive_distance(-3,0,8,0,
+                            2,
+                            1,
+                            5000);
 
-  chassis.turn_to_angle(40,12,3,10,5000);
-  chassis.drive_distance(10,0,12,0);
+  intakeOff();
 
-  //clampDown();
+}
+
+
+void red_rings(){
+
+  chassis.turn_to_angle(140,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(25,0,12,0,
+                        1.5,
+                        10,
+                        5000);
+
+  wait(200,msec);
+
+  chassis.drive_distance(-5,0,12,0,
+                         1.5,
+                         300,
+                         5000);
+
+  chassis.turn_to_angle(115,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(9,0,12,0,
+                         1,
+                         10,
+                         5000);
+
+  chassis.drive_distance(-10,0,12,0,
+                          1.5,
+                          300,
+                          5000);
+
+  chassis.turn_to_angle(40,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(10,0,12,0,
+                          1.5,
+                          300,
+                          5000);
+}
+
+void blue_rings(){
+
+  chassis.turn_to_angle(140,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(25,0,12,0,
+                        1.5,
+                        10,
+                        5000);
+
+  wait(200,msec);
+
+  chassis.drive_distance(-5,0,12,0,
+                         1.5,
+                         300,
+                         5000);
+
+  chassis.turn_to_angle(115,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(9,0,12,0,
+                         1,
+                         10,
+                         5000);
+
+  chassis.drive_distance(-10,0,12,0,
+                          1.5,
+                          300,
+                          5000);
+
+  chassis.turn_to_angle(40,12,
+                        3,
+                        10,
+                        5000);
+
+  chassis.drive_distance(10,0,12,0,
+                          1.5,
+                          300,
+                          5000);
+}
+
+void blue_simple_AWP(){
+
+  start();
+
+  mogo_rush_with_ring();
+
+  clampDown(); //let go of mogo one to get mogo two
+  chassis.drive_distance(2,0,12,0,
+                          2,10,500); //drive backwards a bit to turn better
+
+  chassis.turn_to_angle(-140,12,3,10,5000); //turn and get mogo 2
+  chassis.drive_distance(-10,0,12,0,
+                          1.5,
+                          10,
+                          5000);
+  chassis.drive_distance(-3,0,8,0,
+                          1.5,
+                          300,
+                          5000);
+  clampUp();
+
+  chassis.drive_distance(2,0,12,0,
+                          2,10,500); //drive backwards a bit to turn better
+  chassis.turn_to_angle(-115,12,3,10,5000); //turn and get second ring
+  intakeOn();
+  chassis.drive_distance(10,0,12,0,
+                          1.5,
+                          10,
+                          5000);
+
+  //turn and RUN TOWARDS THE LADDER RUN!
+
+  chassis.turn_to_angle(-40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0); 
 }
 
 //below are game autons
@@ -223,25 +356,6 @@ void red_mogo_rush(){
   intakeOn();
   intakeForTime(500);
   chassis.turn_to_angle(102,12,3,10,5000);
-}
-
-void red_ring_rush(){
-  liftDown();
-  clampDown();
-  chassis.drive_distance(-14,0,12,4,1,100,5000);
-  chassis.drive_distance(-7,0,8,0);
-  clampUp();
-  //chassis.drive_stop();
-  intakeOn();
-  wait(500,msec);
-  chassis.turn_to_angle(140,12,3,10,5000);
-  chassis.drive_distance(25,0,12,0,1.5,10,5000);
-  wait(500,msec);
-  chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(123,12,3,10,5000);
-  chassis.drive_distance(7,0,12,0,1,10,5000);
-  //clampDown();
-  chassis.drive_distance(-5,0,12,0);
 }
 
 void red_four_rings_rush(){
@@ -305,47 +419,30 @@ void blue_mogo_rush(){
   chassis.turn_to_angle(102,12,3,10,5000);
 }
 
-void blue_ring_rush(){
-  liftDown();
-  clampDown();
-  chassis.drive_distance(-14,0,12,4,1,100,5000);
-  chassis.drive_distance(-7,0,8,0);
-  clampUp();
-  intakeOn();
-  wait(500,msec);
-  chassis.turn_to_angle(-140,12,3,10,5000);
-  chassis.drive_distance(25,0,12,0,1.5,10,5000);
-  wait(500,msec);
-  chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(-123,12,3,10,5000);
-  chassis.drive_distance(7,0,12,0,1,10,5000);
-  //clampDown();
-  chassis.drive_distance(-5,0,12,0); 
+void experimentA(){
+
+  calibrate();
+
+  start();
+
+  mogo_rush();
+
 }
 
-void blue_four_rings_rush_experimental(){
+void experimentB(){
 
-  liftDown();
-  clampDown();
-  chassis.drive_distance(-14,0,12,4,1,50,5000);
-  chassis.drive_distance(-7,0,9,0);
-  clampUp();
-  //chassis.drive_stop();
-  intakeOn();
-  wait(400,msec);
-  chassis.turn_to_angle(140,12,3,10,5000);
-  chassis.drive_distance(25,0,12,0,1.5,10,5000);
-  //KABOOM!!! BOOM!!!
+  calibrate();
 
-  wait(500,msec);
-  chassis.drive_distance(-5,0,12,0);
-  chassis.turn_to_angle(115,12,3,10,5000);
-  chassis.drive_distance(9,0,12,0,1,10,5000);
-  //clampDown();
-  chassis.drive_distance(-10,0,12,0);
+}
 
-  chassis.turn_to_angle(40,12,3,10,5000);
-  chassis.drive_distance(10,0,12,0);
+void experimentC(){
 
-  //clampDown();
+  calibrate();
+
+}
+
+void experimentD(){
+
+  calibrate();
+
 }

@@ -30,3 +30,22 @@ void red_ring_rush();
 void blue_ring_rush();
 void red_four_rings_rush();
 void blue_four_rings_rush();
+
+void blue_simple_AWP();
+void red_simple_AWP();
+
+
+void experimentA();
+void experimentB();
+void experimentC();
+void experimentD();
+void experimentE();
+void experimentF();
+void experimentG();
+void experimentH();
+void experimentI();
+void experimentJ();
+void experimentK();
+void experimentL();
+void experimentM();
+void experimentN();
