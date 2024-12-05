@@ -174,27 +174,13 @@ void pre_auton() {
  * autons.cpp and declared in autons.h.
  */
 
-
-/** GARKER Auton Functions **/ /*
- * Runs the selected autonomous program.
- * 
- * 0: Full test, followed by odom test.
- * 1: Drive test.
- * 2: Turn test.
- * 3: Swing test.
- * 4: Full test.
- * 5: Odom test.
- * 6: Tank odom test.
- * 7: Holonomic odom test.
- */
-
 void autonomous(void) {
   auto_started = true;
   switch(current_auton_selection){ 
     case 0:
       default_constants();
       Controller1.Screen.print("Red Ring Rush");
-      red_ring_rush();
+      red_four_rings_rush();
       break;
     case 1:   
       default_constants();
@@ -209,32 +195,43 @@ void autonomous(void) {
     case 3:
       default_constants();
       Controller1.Screen.print("Blue Ring Rush");
-      blue_ring_rush();
+      blue_four_rings_rush();
       break;
     case 4:
-      calibrateWithDelay();
+      calibrate();
       break;
     case 5:
       default_constants();
-      Controller1.Screen.print("Red Four Rings Rush");
-      red_four_rings_rush();
+      Controller1.Screen.print("Experiment A");
+      experimentA();
       break;
     case 6:
       default_constants();
-      Controller1.Screen.print("Blue Four Rings Rush");
-      blue_four_rings_rush();
+      Controller1.Screen.print("Experiment B");
+      experimentB();
       break;
     case 7:
-      calibrateWithDelay();
       default_constants();
-      Controller1.Screen.print("Testing Slot");
-      blue_ring_rush();
+      Controller1.Screen.print("Experiment C");
+      experimentC();
+      break;
+    case 8:
+      default_constants();
+      Controller1.Screen.print("Experiment D");
+      experimentD();
       break;
   }
 }
 
+int usercontrol_selection = 0;
+
 void usercontrol(void) {
-  usercontrolNormal();
+  switch(usercontrol_selection){
+    case 0:
+      usercontrolNormal();
+    case 1:
+      calibrate();
+  }
 }
 
 /*---------------------------------------------------------------------------*/
