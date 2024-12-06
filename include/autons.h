@@ -34,6 +34,11 @@ void blue_four_rings_rush();
 void blue_simple_AWP();
 void red_simple_AWP();
 
+void start();
+void mogo_rush_with_ring();
+
+void red_six_rings();
+void blue_six_rings();
 
 void experimentA();
 void experimentB();
