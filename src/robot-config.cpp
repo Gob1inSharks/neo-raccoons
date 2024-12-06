@@ -27,7 +27,7 @@ motor RB = motor(PORT12,ratio6_1,false);
 
 motor IN = motor(PORT16,ratio18_1,false);
 motor HK = motor(PORT10,ratio6_1,true);
-motor LT = motor(PORT17,ratio18_1,false);
+motor LT = motor(PORT17,ratio18_1,true);
 
 digital_out CL = digital_out(Brain.ThreeWirePort.A);
 
