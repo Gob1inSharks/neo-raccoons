@@ -33,10 +33,14 @@ digital_out CL = digital_out(Brain.ThreeWirePort.A);
 
 //input devices
 controller Controller1 = controller();
-rotation RotaryEncoder = rotation(PORT2,false);
 
-inertial Gyro = inertial(PORT2);
+optical Optical = optical(PORT3);
+distance Distance = distance(PORT4);
+
+inertial Gyro = inertial(PORT1);
 
 void vexcodeInit( void ) {
+
+  calibrate();
   // nothing to initialize
 }

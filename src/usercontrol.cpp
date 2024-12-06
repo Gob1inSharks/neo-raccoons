@@ -1,6 +1,6 @@
 #include "vex.h"
 
-bool clampDown = false;
+bool clampTog = false;
 bool liftUp = false;
 
 /*double maxLiftAngle;

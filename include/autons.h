@@ -40,6 +40,11 @@ void mogo_rush_with_ring();
 void red_six_rings();
 void blue_six_rings();
 
+void blues();
+
+void clampUp();
+void clampDown();
+
 void experimentA();
 void experimentB();
 void experimentC();

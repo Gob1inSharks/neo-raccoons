@@ -22,8 +22,10 @@ extern digital_out CL;
 //Add your devices below, and don't forget to do the same in robot-config.cpp:
 
 extern controller Controller1;
-extern rotation RotaryEncoder;
 
 extern inertial Gyro;
+
+extern optical Optical;
+extern distance Distance;
 
 void vexcodeInit( void );

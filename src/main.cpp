@@ -51,7 +51,7 @@ motor_group(LF,LM,LB),
 motor_group(RF,RM,RB),
 
 //Specify the PORT NUMBER of your inertial sensor, in PORT format (i.e. "PORT1", not simply "1"):
-PORT2, //TODO
+PORT1, //TODO
 
 //Input your wheel diameter. (4" omnis are actually closer to 4.125"):
 2.75, //TODO
@@ -106,8 +106,6 @@ PORT3,     -PORT4,
 
 );
 
-int current_auton_selection = 4; // change this value heres
-
 bool auto_started = true;
 
 /**
@@ -130,32 +128,7 @@ void pre_auton() {
     Brain.Screen.printAt(5, 80, "Chassis Heading Reading:");
     Brain.Screen.printAt(5, 100, "%f", chassis.get_absolute_heading());
     Brain.Screen.printAt(5, 120, "Selected Auton:");
-    switch(current_auton_selection){
-      case 0:
-        Brain.Screen.printAt(5, 140, "Red Ring Rush");
-        break;
-      case 1:
-        Brain.Screen.printAt(5, 140, "Red Mogo Rush");
-        break;
-      case 2:
-        Brain.Screen.printAt(5, 140, "Blue Mogo Rush");
-        break;
-      case 3:
-        Brain.Screen.printAt(5, 140, "Blue Ring Rush");
-        break;
-      case 4:
-        Brain.Screen.printAt(5, 140, "Calibrate");
-        break;
-      case 5:
-        Brain.Screen.printAt(5, 140, "Testing Slot 1");
-        break;
-      case 6:
-        Brain.Screen.printAt(5, 140, "Testing Slot 2");
-        break;
-      case 7:
-        Brain.Screen.printAt(5, 140, "Testing Slot 3");
-        break;
-    }
+
     /* //close the auton selector for simplicity
     if(Brain.Screen.pressing()){
       while(Brain.Screen.pressing()) {}
@@ -174,8 +147,11 @@ void pre_auton() {
  * autons.cpp and declared in autons.h.
  */
 
+
+int current_auton_selection = 0; // change this value heres
+
 void autonomous(void) {
-  auto_started = true;
+  auto_started = false;
   switch(current_auton_selection){ 
     case 0:
       default_constants();
@@ -189,12 +165,12 @@ void autonomous(void) {
       break;
     case 2:
       default_constants();
-      Controller1.Screen.print("Blue Mogo Rush");
+      Controller1.Screen.print("Blue Mogo Four Ring Rush");
       blue_mogo_rush();
       break;
     case 3:
       default_constants();
-      Controller1.Screen.print("Blue Ring Rush");
+      Controller1.Screen.print("Blues");
       blue_four_rings_rush();
       break;
     case 4:
@@ -203,7 +179,7 @@ void autonomous(void) {
     case 5:
       default_constants();
       Controller1.Screen.print("Experiment A");
-      experimentA();
+      clampDown();
       break;
     case 6:
       default_constants();
@@ -246,7 +222,7 @@ void usercontrol(void) {
 int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
-  Competition.drivercontrol(usercontrol);
+  Competition.drivercontrol(blue_four_rings_rush);
 
   // Run the pre-autonomous function.
   pre_auton();
