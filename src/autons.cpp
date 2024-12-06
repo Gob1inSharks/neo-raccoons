@@ -318,6 +318,42 @@ void blue_simple_AWP(){
   chassis.drive_distance(2,0,12,0,
                           2,10,500); //drive backwards a bit to turn better
 
+  chassis.turn_to_angle(140,12,3,10,5000); //turn and get mogo 2
+  chassis.drive_distance(-10,0,12,0,
+                          1.5,
+                          10,
+                          5000);
+  chassis.drive_distance(-3,0,8,0,
+                          1.5,
+                          300,
+                          5000);
+  clampUp();
+
+  chassis.drive_distance(2,0,12,0,
+                          2,10,500); //drive backwards a bit to turn better
+  chassis.turn_to_angle(115,12,3,10,5000); //turn and get second ring
+  intakeOn();
+  chassis.drive_distance(10,0,12,0,
+                          1.5,
+                          10,
+                          5000);
+
+  //turn and RUN TOWARDS THE LADDER RUN!
+
+  chassis.turn_to_angle(-40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0); 
+}
+
+void red_simple_AWP(){
+
+  start();
+
+  mogo_rush_with_ring();
+
+  clampDown(); //let go of mogo one to get mogo two
+  chassis.drive_distance(2,0,12,0,
+                          2,10,500); //drive backwards a bit to turn better
+
   chassis.turn_to_angle(-140,12,3,10,5000); //turn and get mogo 2
   chassis.drive_distance(-10,0,12,0,
                           1.5,
@@ -344,8 +380,10 @@ void blue_simple_AWP(){
   chassis.drive_distance(10,0,12,0); 
 }
 
-//below are game autons
-//only change after testing
+/*
+DO NOT CHANGE THESE FOUR FUNCTIONS BELOW
+WE KNOW THAT THEY WORK, SO JUST IN CASE DO NOT TOUCH THEM AT ALL
+*/
 
 void red_mogo_rush(){
   liftDown();
@@ -373,9 +411,9 @@ void red_four_rings_rush(){
   wait(500,msec);
   chassis.drive_distance(-5,0,12,0);
   chassis.turn_to_angle(115,12,3,10,5000);
-  chassis.drive_distance(9,0,12,0,1,10,5000);
+  chassis.drive_distance(8,0,12,0,1,10,5000);
   //clampDown();
-  chassis.drive_distance(-10,0,12,0);
+  chassis.drive_distance(-9,0,12,0);
 
   chassis.turn_to_angle(40,12,3,10,5000);
   chassis.drive_distance(10,0,12,0);
@@ -398,9 +436,9 @@ void blue_four_rings_rush(){
   wait(500,msec);
   chassis.drive_distance(-5,0,12,0);
   chassis.turn_to_angle(-115,12,3,10,5000);
-  chassis.drive_distance(9,0,12,0,1,10,5000);
+  chassis.drive_distance(8,0,12,0,1,10,5000);
   //clampDown();
-  chassis.drive_distance(-10,0,12,0);
+  chassis.drive_distance(-9,0,12,0);
 
   chassis.turn_to_angle(-40,12,3,10,5000);
   chassis.drive_distance(10,0,12,0);
@@ -425,7 +463,7 @@ void experimentA(){
 
   start();
 
-  mogo_rush();
+  mogo_rush_with_ring();
 
 }
 
@@ -433,11 +471,29 @@ void experimentB(){
 
   calibrate();
 
+  start();
+
+  mogo_rush_with_ring();
+
+  chassis.turn_to_angle(-140,12,3,10,5000);
+  chassis.drive_distance(25,0,12,0,1.5,10,5000);
+  wait(500,msec);
+  chassis.drive_distance(-5,0,12,0);
+  chassis.turn_to_angle(-115,12,3,10,5000);
+  chassis.drive_distance(9,0,12,0,1,10,5000);
+  //clampDown();
+  chassis.drive_distance(-10,0,12,0);
+
+  chassis.turn_to_angle(-40,12,3,10,5000);
+  chassis.drive_distance(10,0,12,0);
+
 }
 
 void experimentC(){
 
   calibrate();
+
+  blue_simple_AWP();
 
 }
 
