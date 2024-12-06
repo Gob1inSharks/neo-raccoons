@@ -457,6 +457,35 @@ void blue_mogo_rush(){
   chassis.turn_to_angle(102,12,3,10,5000);
 }
 
+void red_six_rings(){
+
+  red_four_rings_rush();
+
+  chassis.turn_to_angle(30,12,
+                        1,
+                        500,
+                        5000);
+
+  chassis.drive_distance(10,0,12,0,
+                         1.5,
+                         300,
+                         5000);
+  chassis.drive_distance(4,0,8,0,
+                         1.5,
+                         300,
+                         5000);
+
+  chassis.turn_to_angle(60,12,
+                        1,
+                        500,
+                        5000);
+  chassis.turn_to_angle(30,12,
+                        1,
+                        500,
+                        5000);
+
+}
+
 void experimentA(){
 
   calibrate();
