@@ -226,12 +226,8 @@ void autonomous(void) {
 int usercontrol_selection = 0;
 
 void usercontrol(void) {
-  switch(usercontrol_selection){
-    case 0:
-      usercontrolNormal();
-    case 1:
-      calibrate();
-  }
+  usercontrolNormal();
+  //calibrate();
 }
 
 /*---------------------------------------------------------------------------*/
