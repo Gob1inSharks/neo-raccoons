@@ -35,6 +35,15 @@
         {"name":"include/usercontrol.h",                  "type":"File",            "specialType":""},
         {"name":"src/usercontrol.cpp",                    "type":"File",            "specialType":""},
 
+        {"name":"include/Autonmous/auton-utils.h",       "type":"File",             "specialType":""},
+        {"name":"src/Autonmous/auton-utils.cpp",         "type":"File",             "specialType":""},
+        {"name":"include/Autonmous/autons.h",            "type":"File",             "specialType":""},
+        
+        {"name":"include/Autonmous/skills.h",            "type":"File",             "specialType":""},
+        {"name":"src/Autonmous/skills.cpp",              "type":"File",             "specialType":""},
+        {"name":"include/Autonmous/test.h",              "type":"File",             "specialType":""},
+        {"name":"src/Autonmous/test.cpp",                "type":"File",             "specialType":""},
+
         {"name":"include",                                "type":"Directory"},
         {"name":"include/JAR-Template",                   "type":"Directory"},
         {"name":"src",                                    "type":"Directory"},

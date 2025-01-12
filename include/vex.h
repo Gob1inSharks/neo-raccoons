@@ -25,7 +25,6 @@
 #include "JAR-Template/drive.h"
 #include "JAR-Template/util.h"
 #include "JAR-Template/PID.h"
-#include "Autonmous/autons.h"
 #include "Autonmous/auton-utils.h"
 #include "usercontrol.h"
 

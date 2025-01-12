@@ -1,5 +1,6 @@
 #include "vex.h"
 #include "usercontrol.h"
+#include "Autonmous/autons.h"
 
 using namespace vex;
 competition Competition;
