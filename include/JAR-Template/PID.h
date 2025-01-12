@@ -7,8 +7,8 @@
  * update period is 10ms or 100Hz.
  */
 
-class PID
-{
+class PID{
+  
 public:
   float error = 0.1;
   float kp = 0.1;

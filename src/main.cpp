@@ -39,7 +39,7 @@ Drive chassis(
 //HOLONOMIC_TWO_ROTATION
 //
 //Write it here:
-ZERO_TRACKER_NO_ODOM,
+ZERO_TRACKER_ODOM,
 
 //Add the names of your Drive motors into the motor groups below, separated by commas, i.e. motor_group(Motor1,Motor2,Motor3).
 //You will input whatever motor names you chose when you configured your robot using the sidebar configurer, they don't have to be "Motor1" and "Motor2".
@@ -121,21 +121,14 @@ void pre_auton() {
   default_constants();
 
   while(!auto_started){
+
     Brain.Screen.clearScreen();
-    Brain.Screen.printAt(5, 20, "Neo Racoons");
+    Brain.Screen.printAt(5, 20, "Racoon Works");
     Brain.Screen.printAt(5, 40, "Battery Percentage:");
     Brain.Screen.printAt(5, 60, "%d", Brain.Battery.capacity());
     Brain.Screen.printAt(5, 80, "Chassis Heading Reading:");
     Brain.Screen.printAt(5, 100, "%f", chassis.get_absolute_heading());
-    Brain.Screen.printAt(5, 120, "Selected Auton:");
 
-    /* //close the auton selector for simplicity
-    if(Brain.Screen.pressing()){
-      while(Brain.Screen.pressing()) {}
-      current_auton_selection ++;
-    } else if (current_auton_selection == 8){
-      current_auton_selection = 0;
-    }*/
     task::sleep(10);
   }
 }
@@ -155,46 +148,37 @@ void autonomous(void) {
   switch(current_auton_selection){ 
     case 0:
       default_constants();
-      Controller1.Screen.print("Red Ring Rush");
-      red_four_rings_rush();
+      Controller1.Screen.print("");
       break;
     case 1:   
       default_constants();
-      Controller1.Screen.print("Red Mogo Rush");
-      red_mogo_rush();
+      Controller1.Screen.print("");
       break;
     case 2:
       default_constants();
-      Controller1.Screen.print("Blue Mogo Four Ring Rush");
-      blue_mogo_rush();
+      Controller1.Screen.print("");
       break;
     case 3:
-      default_constants();
-      Controller1.Screen.print("Blues");
-      blue_four_rings_rush();
       break;
     case 4:
-      calibrate();
+      default_constants();
+      Controller1.Screen.print("");
       break;
     case 5:
       default_constants();
-      Controller1.Screen.print("Experiment A");
-      clampDown();
+      Controller1.Screen.print("");
       break;
     case 6:
       default_constants();
-      Controller1.Screen.print("Experiment B");
-      experimentB();
+      Controller1.Screen.print("");
       break;
     case 7:
       default_constants();
-      Controller1.Screen.print("Experiment C");
-      experimentC();
+      Controller1.Screen.print("");
       break;
     case 8:
       default_constants();
-      Controller1.Screen.print("Experiment D");
-      experimentD();
+      Controller1.Screen.print("");
       break;
   }
 }
@@ -202,8 +186,7 @@ void autonomous(void) {
 int usercontrol_selection = 0;
 
 void usercontrol(void) {
-  usercontrolNormal();
-  //calibrate();
+  usercontrol();
 }
 
 /*---------------------------------------------------------------------------*/
@@ -222,7 +205,7 @@ void usercontrol(void) {
 int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
-  Competition.drivercontrol(blue_four_rings_rush);
+  Competition.drivercontrol(usercontrol);
 
   // Run the pre-autonomous function.
   pre_auton();

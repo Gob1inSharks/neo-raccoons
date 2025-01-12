@@ -1,17 +1,24 @@
 #pragma once
 #include "vex.h"
 
-enum drive_setup {ZERO_TRACKER_NO_ODOM, ZERO_TRACKER_ODOM, TANK_ONE_FORWARD_ENCODER, TANK_ONE_FORWARD_ROTATION, 
-TANK_ONE_SIDEWAYS_ENCODER, TANK_ONE_SIDEWAYS_ROTATION, TANK_TWO_ENCODER, TANK_TWO_ROTATION, 
-HOLONOMIC_TWO_ENCODER, HOLONOMIC_TWO_ROTATION};
+enum drive_setup {ZERO_TRACKER_NO_ODOM, 
+                  ZERO_TRACKER_ODOM, 
+                  TANK_ONE_FORWARD_ENCODER, 
+                  TANK_ONE_FORWARD_ROTATION, 
+                  TANK_ONE_SIDEWAYS_ENCODER, 
+                  TANK_ONE_SIDEWAYS_ROTATION, 
+                  TANK_TWO_ENCODER, 
+                  TANK_TWO_ROTATION, 
+                  HOLONOMIC_TWO_ENCODER, 
+                  HOLONOMIC_TWO_ROTATION};
 
 /**
  * Drive class supporting tank and holo drive, with or without odom.
  * Eight flavors of odom and six custom motion algorithms.
  */
 
-class Drive
-{
+class Drive{
+  
 private:
   float wheel_diameter;
   float wheel_ratio;
