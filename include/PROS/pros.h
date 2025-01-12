@@ -1,5 +1,5 @@
 /**
- * \file main.h
+ * \file pros.h
  *
  * Contains common definitions and header files used throughout your PROS
  * project.
